@@ -3,7 +3,7 @@ package utn.dds;
 import org.junit.Test;
 
 
-public class OrganizacionTest {
+public class EgresoTest {
 
 	@Test
 	public void testHola() {

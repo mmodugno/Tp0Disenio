@@ -21,28 +21,22 @@ public class Egreso {
 		contenido.add(nuevoItem);
 	}
 	
-	public boolean seHaceElRemito() {
+	public boolean seNecesitaElRemito() {
 		return contenido.stream().allMatch(item -> item.necesitaRemito());	
 	}
 	
-	
-	
-	public double calcular() {
-		this.cerrarOperacion();
-		
-		double total = contenido.stream()
-	      .mapToDouble(item -> item.getPrecio())
-	      .sum();
-		
-		if(this.seHaceElRemito()) {
-			new Remito(total);
-		}
-		
-		return total;
-		
-		
+	public double precioTotal() {
+		return contenido.stream()
+			      .mapToDouble(item -> item.getPrecio())
+			      .sum();
 	}
 	
+	
+	public void realizarRemito(double monto) {
+		if(this.seNecesitaElRemito()) {
+			new Remito(this.precioTotal());
+		}	
+	}
 }
 
 
