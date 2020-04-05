@@ -6,6 +6,7 @@ import org.junit.Test;
 public class EgresoTest {
 
 	@Test
-	public void testHola() {
+	public void testTotalDeRemitoSegunCompras() {
+		
 	}
 }

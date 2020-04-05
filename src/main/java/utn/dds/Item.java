@@ -5,9 +5,8 @@ package utn.dds;
 public abstract class Item {
 	private String nombre;
 	private float precio;
-	private PrecioVariable tipoPrecio;
+	private TipoPrecio tipoPrecio = new PrecioVariable();
 	
-
 	
 	public Item(String nombre,float precio) {
 		this.nombre = nombre;
