@@ -1,20 +1,27 @@
 package utn.dds;
 
+
+
 public abstract class Item {
 	private String nombre;
 	private float precio;
+	private PrecioVariable tipoPrecio;
 	
 
 	
-	public Item(String nombre, float precio) {
-		super();
+	public Item(String nombre,float precio) {
 		this.nombre = nombre;
 		this.precio = precio;
 	}
 	
-	public void cambiarPrecio(float nuevoPrecio){
-		this.precio = nuevoPrecio;
+
+	 public void cambiarPrecio(float nuevoPrecio){
+		tipoPrecio.validarCambio();	
+		this.precio = nuevoPrecio;	
 	}
+	
+	
+	
 	public float getPrecio() {
 		return precio;
 	}
@@ -23,6 +30,12 @@ public abstract class Item {
 		public boolean necesitaRemito() {
 		return true;
 	}
+		
+	
+	public void fijarPrecio() {
+		this.tipoPrecio = new PrecioFijo();
+	}
+	
 	
 	
 }

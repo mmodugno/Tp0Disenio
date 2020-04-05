@@ -6,4 +6,6 @@ public class Articulo extends Item{
 		super(nombre, precio);
 	}
 
+
+
 }
