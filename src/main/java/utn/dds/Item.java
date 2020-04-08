@@ -15,7 +15,8 @@ public abstract class Item {
 	
 
 	 public void cambiarPrecio(float nuevoPrecio){
-		tipoPrecio.validarCambio();	
+		
+		tipoPrecio.validarCambio(nuevoPrecio);	
 		this.precio = nuevoPrecio;	
 	}
 	

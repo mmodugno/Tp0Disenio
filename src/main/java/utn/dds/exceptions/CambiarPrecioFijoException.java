@@ -1,6 +1,6 @@
 package utn.dds.exceptions;
 
-public class CambiarPrecioFijoException extends Exception {
+public class CambiarPrecioFijoException extends RuntimeException {
 
 	public CambiarPrecioFijoException() {
 		// TODO Auto-generated constructor stub
@@ -11,18 +11,18 @@ public class CambiarPrecioFijoException extends Exception {
 		// TODO Auto-generated constructor stub
 	}
 
-	public CambiarPrecioFijoException(Throwable arg0) {
-		super(arg0);
+	public CambiarPrecioFijoException(Throwable cause) {
+		super(cause);
 		// TODO Auto-generated constructor stub
 	}
 
-	public CambiarPrecioFijoException(String arg0, Throwable arg1) {
-		super(arg0, arg1);
+	public CambiarPrecioFijoException(String message, Throwable cause) {
+		super(message, cause);
 		// TODO Auto-generated constructor stub
 	}
 
-	public CambiarPrecioFijoException(String arg0, Throwable arg1, boolean arg2, boolean arg3) {
-		super(arg0, arg1, arg2, arg3);
+	public CambiarPrecioFijoException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+		super(message, cause, enableSuppression, writableStackTrace);
 		// TODO Auto-generated constructor stub
 	}
 

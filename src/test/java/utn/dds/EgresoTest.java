@@ -6,6 +6,8 @@ import org.junit.Test;
 
 import utn.dds.Articulo;
 import utn.dds.Egreso;
+import utn.dds.exceptions.CambiarPrecioFijoException;
+import utn.dds.exceptions.PrecioNegativoException;
 
 
 public class EgresoTest {
@@ -13,7 +15,7 @@ public class EgresoTest {
 	private Articulo computadora = new Articulo("Computadora",100);
 	private Articulo escritorio = new Articulo("Escritorio",50);
 	
-	private Servicio actualizaciones = new Servicio("Actualizaciones",500);
+	private Servicio mantenimiento = new Servicio("Mantenimiento",500);
 	
 	@Before
 	public void init() {
@@ -21,28 +23,62 @@ public class EgresoTest {
 		    egreso.cargarItem(computadora);
 		  }
 	
+	
 	@Test
 	public void testPrecioTotalDeEgresos() {
 		
 		egreso.cargarItem(escritorio);
-		
+		egreso.cerrarOperacion();
 		Assert.assertEquals(150, egreso.precioTotal(), 0.01);
 	}
 	
-	
-	@Test (	expected=RuntimeException.class)
- 	public void testCerrarOperacionesYNoCambiarPrecios() {
+	@Test
+	public void testCambiarPrecioAntesDeCerrarOperacion() {
+
+		Assert.assertEquals(100, egreso.precioTotal(), 0.01); //ANTES de modificar el precio el total es 100
 		
+		computadora.cambiarPrecio(120);
+		egreso.cerrarOperacion();
+		Assert.assertEquals(120, egreso.precioTotal(), 0.01);
+	}
+	
+	
+	@Test 
+ 	public void testCerrarOperacionesYCambiarPrecios() {
+		
+		try {
 		egreso.cerrarOperacion();
 		computadora.cambiarPrecio(200);
-	
+		 Assert.fail("Debería tirar una excepcion");
+		}
+		catch(CambiarPrecioFijoException excepcion) {
+			String message = "El precio no puede modificarse, porque la operacion esta cerrada";
+			Assert.assertEquals(message, excepcion.getMessage());
+		}
  	}
 	
+	
+	
+	@Test (expected = PrecioNegativoException.class)
+	public void testCambiarAPrecioNegativo() {
+		computadora.cambiarPrecio(-300);
+	
+	}
+	
 	@Test
-	public void siHayServicioNoNecesitaRemito() {
+	public void testSiHayServicioNoNecesitaRemito() {
+		egreso.cargarItem(mantenimiento);
+		Assert.assertFalse(egreso.seNecesitaElRemito());
+	}
+	
+	
+	
+	@Test
+	public void testNecesitaRemitoHastaAgregarUnServicio() {
+		egreso.cargarItem(escritorio);
+		Assert.assertTrue(egreso.seNecesitaElRemito());
 		
-		egreso.cargarItem(actualizaciones);
-		
+		egreso.cargarItem(mantenimiento);
 		Assert.assertFalse(egreso.seNecesitaElRemito());
 	}
 	
