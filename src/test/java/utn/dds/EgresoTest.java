@@ -14,8 +14,10 @@ public class EgresoTest {
 	private Egreso egreso;
 	private Articulo computadora = new Articulo("Computadora",100);
 	private Articulo escritorio = new Articulo("Escritorio",50);
-	
+		
 	private Servicio mantenimiento = new Servicio("Mantenimiento",500);
+	
+	private Egreso egresoVacio = new Egreso();
 	
 	@Before
 	public void init() {
@@ -24,12 +26,19 @@ public class EgresoTest {
 		  }
 	
 	
+	
 	@Test
 	public void testPrecioTotalDeEgresos() {
 		
 		egreso.cargarItem(escritorio);
 		egreso.cerrarOperacion();
 		Assert.assertEquals(150, egreso.precioTotal(), 0.01);
+	}
+	
+	
+	@Test
+	public void testTotalEnUnEgresoVacio() {
+		Assert.assertEquals(0, egresoVacio.precioTotal(), 0.01);
 	}
 	
 	@Test
